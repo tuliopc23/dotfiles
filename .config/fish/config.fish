@@ -38,7 +38,11 @@ if status is-interactive
     
     # FZF integration for enhanced completions
     if command -q fzf
-        source /opt/homebrew/Cellar/fzf/0.64.0/shell/key-bindings.fish
+        # Use dynamic path to avoid version-specific issues
+        set -l fzf_key_bindings (brew --prefix fzf)/shell/key-bindings.fish
+        if test -f $fzf_key_bindings
+            source $fzf_key_bindings
+        end
     end
 end
 
