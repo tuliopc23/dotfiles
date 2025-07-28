@@ -1,0 +1,48 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = "Tulio Cunha "
+	email = tuliopinheiroc23@gmail.com
+	signingKey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP/trvBO/E0X+HCopvbkDL3TKq93mWw7ODnZ5fxVVByy GitHub
+[diff]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[merge]
+	tool = Kaleidoscope
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
+	keepBackup = true
+[commit]
+	gpgsign = true
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[gpg]
+	program = /opt/homebrew/bin/gpg
+	format = ssh
+[core]
+	excludesfile = /Users/tuliopinheirocunha/.config/git/ignore
+[pull]
+	rebase = true
+[tag]
+	forceSignAnnotated = true
+[init]
+	defaultBranch = main
+[alias]
+	ai = !pkgx npx --yes aicommits
+	wip = "!git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"wip\""

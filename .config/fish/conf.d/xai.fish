@@ -1,0 +1,2 @@
+# XAI API Key for Grok 4 in Zed
+set -gx XAI_API_KEY "xai-dMip4E1LhzaHr6k1P7HPqup46tUv8boSpZQ131BHubH2DQxo9uDu90CLdmmly1IURMN84W39276Zx2Mc"
