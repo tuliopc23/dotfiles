@@ -21,6 +21,7 @@ function sync-dotfiles --description "Sync dotfiles with GitHub repository"
     git add .config/fish/functions/ 2>/dev/null; or true
     git add .config/fish/conf.d/ 2>/dev/null; or true
     git add .config/fish/completions/ 2>/dev/null; or true
+    git add .config/starship.toml 2>/dev/null; or true
     git add .gitconfig 2>/dev/null; or true
     git add .profile 2>/dev/null; or true
     git add .bash_profile 2>/dev/null; or true
