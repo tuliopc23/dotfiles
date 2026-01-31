@@ -1,0 +1,66 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = false
+[safe]
+	directory = /opt/homebrew/Library/Taps/homebrew/homebrew-core
+	directory = /opt/homebrew/Library/Taps/homebrew/homebrew-cask
+[commit]
+	gpgsign = true
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[gpg]
+	program = /opt/homebrew/bin/gpg
+	format = ssh
+[user]
+	name = Tulio Cunha
+	email = tuliopinheiroc23@gmail.com
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP/trvBO/E0X+HCopvbkDL3TKq93mWw7ODnZ5fxVVByy GitHub
+[merge]
+	conflictStyle = zdiff3
+	tool = Kaleidoscope
+[mergetool]
+	keepBackup = true
+	prompt = false
+[pull]
+	rebase = true
+[coderabbit]
+	machineId = cli/9625b743fcc045bb8c808da0db46f19d
+[init]
+	defaultBranch = main
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	line-numbers = true
+	side-by-side = true
+	syntax-theme = Dracula
+	features = decorations
+
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+[diff]
+	tool = Kaleidoscope
+[difftool "ksdiff"]
+	cmd = ksdiff \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = true
+[mergetool "ksdiff"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+[gitbutler]
+	aiModelProvider = openai
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+	trustExitCode = true
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
