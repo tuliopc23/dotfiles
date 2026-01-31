@@ -14,8 +14,8 @@
 	program = /opt/homebrew/bin/gpg
 	format = ssh
 [user]
-	name = Tulio Cunha
-	email = tuliopinheiroc23@gmail.com
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
 	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP/trvBO/E0X+HCopvbkDL3TKq93mWw7ODnZ5fxVVByy GitHub
 [merge]
 	conflictStyle = zdiff3
