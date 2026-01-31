@@ -1,0 +1,87 @@
+[[manager.prepend_keymap]]
+on   = "z"
+desc = "Jump to file/directory via fzf"
+run  = """
+shell '
+	res="$(fd --hidden --follow --exclude .git | fzf --preview "file {}")"
+	if [ -n "$res" ]; then
+		if [ -d "$res" ]; then
+			ya pub dds-cd --str "$res"
+		else
+			ya pub dds-cd --str "$(dirname "$res")"
+			ya pub dds-reveal --str "$res"
+		fi
+	fi
+' --block --confirm
+"""
+
+[[manager.prepend_keymap]]
+on   = "Z"
+desc = "Jump to directory via fzf"
+run  = """
+shell '
+	res="$(fd --type d --hidden --follow --exclude .git | fzf --preview "tree -L 1 {}")"
+	if [ -n "$res" ]; then
+		ya pub dds-cd --str "$res"
+	fi
+' --block --confirm
+"""
+[[manager.prepend_keymap]]
+on = "H"
+run = "plugin duckdb -1"
+desc = "Scroll one column to the left"
+
+[[manager.prepend_keymap]]
+on = "L"
+run = "plugin duckdb +1"
+desc = "Scroll one column to the right"
+
+[[manager.prepend_keymap]]
+on = ["g", "o"]
+run = "plugin duckdb -open"
+desc = "open with duckdb"
+
+[[manager.prepend_keymap]]
+on = ["g", "u"]
+run = "plugin duckdb -ui"
+desc = "open with duckdb ui"
+
+[[manager.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+# keymap.toml
+[[manager.prepend_keymap]]
+on   = "T"
+run  = "plugin toggle-pane min-preview"
+desc = "Show or hide the preview pane"
+
+[[manager.prepend_keymap]]
+on   = "f"
+run  = "plugin jump-to-char"
+desc = "Jump to char"
+
+[[manager.prepend_keymap]]
+on  = "M"
+run = "plugin mount"
+
+[[manager.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter"
+desc = "Smart filter"
+
+[[manager.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
+
+[[manager.prepend_keymap]]
+on   = [ "b", "a" ]
+run  = "plugin mactag add"
+desc = "Tag selected files"
+
+[[manager.prepend_keymap]]
+on   = [ "b", "r" ]
+run  = "plugin mactag remove"
+desc = "Untag selected files"

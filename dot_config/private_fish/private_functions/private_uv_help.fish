@@ -1,0 +1,32 @@
+# UV Quick Reference Guide
+function uv_help --description "Quick reference for uv usage"
+    echo "\n🐶 UV - An Extremely Fast Python Package Manager 🐶\n"
+    echo "=== DEFAULT ALIASES ==="
+    echo "python  → uv run python     # Run Python with uv"
+    echo "pip     → uv pip            # Use uv's pip-compatible interface\n"
+    
+    echo "=== ABBREVIATIONS ==="
+    echo "uvi     → uv init           # Initialize a new project"
+    echo "uva     → uv add            # Add a dependency"
+    echo "uvr     → uv remove         # Remove a dependency"
+    echo "uvs     → uv sync           # Install dependencies from lockfile"
+    echo "uvl     → uv lock           # Create or update lockfile"
+    echo "uvrun   → uv run            # Run a command in the project environment\n"
+    
+    echo "=== EXAMPLE USAGE ==="
+    echo "uv init                     # Create a new Python project"
+    echo "uv add requests             # Add the requests package"
+    echo "uv add --dev pytest         # Add pytest as a development dependency"
+    echo "uv run script.py            # Run a Python script"
+    echo "uv run python               # Run Python interpreter"
+    echo "uv pip install django       # Install Django using uv's pip interface"
+    echo "uv python install 3.12      # Install Python 3.12\n"
+    
+    echo "=== BENEFITS ==="
+    echo "🚀 Much faster than pip"
+    echo "📦 Better dependency resolution"
+    echo "🐍 Automatic virtual environment management"
+    echo "📁 Clean project structure"
+    echo "🔒 Lockfile support for reproducible builds"
+    echo "\nFor more help: uv help <command>"
+end

@@ -1,0 +1,22 @@
+layout {
+    pane split_direction="vertical" {
+        pane size="20%" {
+            plugin location="zellij:strider"
+        }
+        pane split_direction="horizontal" {
+            pane size="80%" focus=true {
+                command "hx"
+                args "."
+            }
+            pane size="20%" {
+                command "fish"
+            }
+        }
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+}

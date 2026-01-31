@@ -1,0 +1,84 @@
+
+title = 󱙝  􀩼 􀣺 
+window-subtitle = working-directory
+shell-integration = detect
+shell-integration-features = true
+bold-is-bright = true
+theme = light:Xcode Dark,dark:Xcode Dark hc
+cursor-color = #FF8170
+cursor-text = #60CBE7
+cursor-style-blink = true
+font-size = 14
+font-family = Liga SFMono Nerd Font SemiBold
+alpha-blending = native
+macos-icon = official
+auto-update-channel = tip
+freetype-load-flags = true
+wait-after-command = true
+link-url = true
+macos-option-as-alt = false
+link-previews = true
+window-padding-x = 15
+window-padding-y = 15
+window-padding-balance = true
+window-vsync = true
+window-decoration = auto
+window-title-font-family = SF Pro Rounded
+window-subtitle = working-directory
+window-theme = auto
+window-show-tab-bar = auto
+focus-follows-mouse = true
+window-colorspace = display-p3
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+copy-on-select = true
+right-click-action = context-menu
+custom-shader = /Users/tuliopinheirocunha/.config/ghostty/shaders/tesla_coil.glsl
+custom-shader-animation = true
+macos-window-buttons = visible
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = visible
+macos-dock-drop-behavior = new-tab
+macos-window-shadow = true
+macos-hidden = never
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+macos-icon = official
+macos-icon-frame = aluminum
+term = xterm-ghostty
+bold-color = bright
+async-backend = auto
+auto-update = download
+auto-update-channel = tip
+mouse-shift-capture = true
+cursor-click-to-move = true
+selection-clear-on-typing = true
+grapheme-width-method = unicode
+background-opacity = 0.98
+background-blur = true
+macos-shortcuts = allow
+macos-option-as-alt = true
+font-thicken = true
+font-thicken-strength = 50
+adjust-icon-height = -10%
+minimum-contrast = 2.5
+selection-foreground = cell-background
+selection-background = cell-foreground
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 2
+unfocused-split-opacity = 0.6
+selection-clear-on-copy = true
+env = EDITOR=nvim
+env = VISUAL=nvim
+background-blur-radius = 80
+adjust-cursor-thickness = 2
+
+# Keybinds
+keybind = shift+enter=text:\x1b\r
+keybind = global:cmd+backquote=toggle_quick_terminal
+keybind = super+i=inspector:toggle
+keybind = super+r=reload_config
+
+
+

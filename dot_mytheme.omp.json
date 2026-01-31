@@ -1,0 +1,268 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "pink": "#ff7eb6",
+    "light_blue": "#78a9ff",
+    "teal": "#008080",
+    "orange": "#FF8170",
+    "magenta": "#B281EB",
+    "mint": "#ACF2E4",
+    "lavender": "#DABAFF",
+    "white": "#E0DEF4",
+    "red": "#ef5350",
+    "green": "#32FF9F"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "p:pink",
+          "style": "plain",
+          "template": " {{ .Icon }} Tulio's MacBookPro  \ueeff  \udb81\ude33 ",
+          "type": "os"
+        },
+        {
+          "foreground": "p:white",
+          "style": "plain",
+          "template": "\uf432 ",
+          "type": "text"
+        },
+        {
+          "foreground": "p:lavender",
+          "style": "plain",
+          "template": "\uf489 {{ .Name }} ",
+          "type": "shell"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "foreground": "p:teal",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}p:red{{ end }}"
+          ],
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": "{{ if gt .Code 0 }}\udb83\udc30 Failed{{ else }}\udb83\udc52 Completed{{ end }} ",
+          "type": "status"
+        },
+        {
+          "foreground": "p:light_blue",
+          "style": "plain",
+          "template": "  \uf43a {{ .CurrentDate | date \"15:04\" }} ",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "p:orange",
+          "properties": {
+            "folder_icon": "\udb80\ude4b",
+            "home_icon": "~",
+            "style": "mixed",
+            "max_depth": 3
+          },
+          "style": "plain",
+          "template": "\udb80\ude4b  {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "foreground": "p:orange",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue755 {{ .Full }} ",
+          "type": "swift"
+        },
+        {
+          "foreground": "p:orange",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue6a9 {{ .Full }} ",
+          "type": "zig"
+        },
+        {
+          "foreground": "p:lavender",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue7a8 {{ .Full }} ",
+          "type": "rust"
+        },
+        {
+          "foreground": "p:light_blue",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue627 {{ .Full }} ",
+          "type": "go"
+        },
+        {
+          "foreground": "p:magenta",
+          "properties": {
+            "fetch_version": true,
+            "home_enabled": false
+          },
+          "style": "plain",
+          "template": "\ue76f {{ .Full }} ",
+          "type": "bun"
+        },
+        {
+          "foreground": "p:green",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue73c {{ .Full }} ",
+          "type": "python"
+        },
+        {
+          "foreground": "p:red",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue791 {{ .Full }} ",
+          "type": "ruby"
+        },
+        {
+          "foreground": "p:magenta",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue7c5 {{ .Full }} ",
+          "type": "lua"
+        },
+        {
+          "foreground": "p:magenta",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\ue634 {{ .Full }} ",
+          "type": "kotlin"
+        },
+        {
+          "foreground": "p:orange",
+          "properties": {
+            "fetch_version": true
+          },
+          "style": "plain",
+          "template": "\uf06d {{ .Full }} ",
+          "type": "mojo"
+        },
+        {
+          "foreground": "p:teal",
+          "properties": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "ahead_icon": "\uf0ee ",
+            "behind_icon": "\uf0ed ",
+            "diverged_icon": "\udb81\udd2a ",
+            "up_to_date_icon": "\udb80\udd60 ",
+            "branch_icon": "\uf126 "
+          },
+          "style": "plain",
+          "template": "{{ .HEAD }}{{ if .UpstreamIcon }} {{ .UpstreamIcon }}{{ end }} <p:light_blue>{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}</> ",
+          "type": "git"
+        },
+        {
+          "foreground": "p:pink",
+          "style": "plain",
+          "template": "\u2771 ",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "transient_prompt": {
+    "background": "transparent",
+    "foreground_templates": [
+      "{{ if gt .Code 0 }}p:red{{ else }}p:pink{{ end }}"
+    ],
+    "template": "{{ if gt .Code 0 }}✗{{ else }}❯{{ end }} "
+  },
+  "secondary_prompt": {
+    "background": "transparent",
+    "foreground": "p:white",
+    "template": "❯❯ "
+  },
+  "tooltips": [
+    {
+      "type": "git",
+      "tips": ["git", "g"],
+      "style": "plain",
+      "foreground": "p:teal",
+      "template": " {{ .HEAD }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}",
+      "properties": {
+        "fetch_status": true,
+        "fetch_upstream_icon": true
+      }
+    },
+    {
+      "type": "python",
+      "tips": ["python", "python3", "py"],
+      "style": "plain",
+      "foreground": "p:green",
+      "template": "\ue73c {{ .Full }}"
+    },
+    {
+      "type": "node",
+      "tips": ["node", "npm", "yarn", "pnpm"],
+      "style": "plain",
+      "foreground": "p:green",
+      "template": "\ue718 {{ .Full }}"
+    },
+    {
+      "type": "go",
+      "tips": ["go"],
+      "style": "plain",
+      "foreground": "p:light_blue",
+      "template": "\ue627 {{ .Full }}"
+    },
+    {
+      "type": "rust",
+      "tips": ["cargo", "rustc"],
+      "style": "plain",
+      "foreground": "p:lavender",
+      "template": "\ue7a8 {{ .Full }}"
+    },
+    {
+      "type": "kubectl",
+      "tips": ["kubectl", "k"],
+      "style": "plain",
+      "foreground": "p:magenta",
+      "template": "\udb84\udc06 {{ .Context }}"
+    },
+    {
+      "type": "aws",
+      "tips": ["aws"],
+      "style": "plain",
+      "foreground": "p:orange",
+      "template": "\ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}"
+    }
+  ],
+  "version": 4,
+  "final_space": true,
+  "auto_upgrade": true,
+  "disable_notice": false
+}

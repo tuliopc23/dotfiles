@@ -1,0 +1,206 @@
+# Xcode-inspired theme for Yazi
+# Colors based on Xcode's default dark theme
+
+[mgr]
+cwd = { fg = "#42BFFA" }  # Xcode blue
+
+# Hovered element - Xcode selection blue
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+
+# Find matches
+find_keyword  = { fg = "#FC6A5D", bold = true }  # Xcode red/pink
+find_position = { fg = "#FC6A5D", bg = "reset", bold = true }
+
+# Markers
+marker_selected = { fg = "#6BD089", bg = "#6BD089" }  # Xcode green
+marker_copied   = { fg = "#FDD835", bg = "#FDD835" }  # Yellow
+marker_cut      = { fg = "#FC6A5D", bg = "#FC6A5D" }  # Red
+
+# Tabs
+tab_active   = { reversed = true }
+tab_inactive = {}
+tab_width    = 1
+
+# Count
+count_copied   = { fg = "#1E1E1E", bg = "#FDD835" }
+count_cut      = { fg = "#1E1E1E", bg = "#FC6A5D" }
+count_selected = { fg = "#1E1E1E", bg = "#6BD089" }
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "#3C3C3C" }  # Xcode gray borders
+
+[status]
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#3C3C3C", bg = "#3C3C3C" }
+
+# Mode indicators
+mode_normal = { fg = "#1E1E1E", bg = "#42BFFA", bold = true }  # Blue
+mode_select = { fg = "#1E1E1E", bg = "#6BD089", bold = true }  # Green
+mode_unset  = { fg = "#1E1E1E", bg = "#D782F0", bold = true }  # Purple
+
+# Status indicators
+progress_label  = { bold = true }
+progress_normal = { fg = "#42BFFA", bg = "#3C3C3C" }
+progress_error  = { fg = "#FC6A5D", bg = "#3C3C3C" }
+
+# Permissions
+permissions_t = { fg = "#6BD089" }
+permissions_r = { fg = "#FDD835" }
+permissions_w = { fg = "#FC6A5D" }
+permissions_x = { fg = "#D782F0" }
+permissions_s = { fg = "#87CEEB" }
+
+[select]
+border   = { fg = "#42BFFA" }
+active   = { fg = "#D782F0", bold = true }  # Purple
+inactive = {}
+
+[input]
+border   = { fg = "#42BFFA" }
+title    = { fg = "#42BFFA" }
+value    = {}
+selected = { reversed = true }
+
+[completion]
+border   = { fg = "#42BFFA" }
+active   = { reversed = true }
+inactive = {}
+
+# Icons
+icon_dirs  = ""
+icon_files = ""
+icon_exec  = ""
+
+[tasks]
+border  = { fg = "#42BFFA" }
+title   = { fg = "#42BFFA" }
+hovered = { fg = "#D782F0", underline = true }
+
+[which]
+cols            = 3
+mask            = { bg = "#1E1E1E" }
+cand            = { fg = "#42BFFA" }
+rest            = { fg = "#7F7F7F" }
+desc            = { fg = "#D782F0" }
+separator       = "  "
+separator_style = { fg = "#3C3C3C" }
+
+[help]
+on      = { fg = "#6BD089" }
+run     = { fg = "#D782F0" }
+desc    = {}
+hovered = { reversed = true }
+footer  = { fg = "#3C3C3C", bg = "#1E1E1E" }
+
+[notify]
+title_info  = { fg = "#42BFFA" }
+title_warn  = { fg = "#FDD835" }
+title_error = { fg = "#FC6A5D" }
+
+# Filetype-based highlighting - Xcode inspired colors
+[filetype]
+rules = [
+	# Images - cyan/blue
+	{ mime = "image/*", fg = "#42BFFA" },
+	
+	# Videos - purple
+	{ mime = "video/*", fg = "#D782F0" },
+	
+	# Audio - magenta
+	{ mime = "audio/*", fg = "#FC6A5D" },
+	
+	# Archives - yellow
+	{ mime = "application/*zip", fg = "#FDD835" },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#FDD835" },
+	
+	# Documents - green
+	{ mime = "application/{pdf,doc,docx,xls,xlsx,ppt,pptx}", fg = "#6BD089" },
+	
+	# Code and text - default with slight variations
+	{ mime = "text/*", fg = "#DCDFE4" },
+	
+	# Directories - blue
+	{ name = "*/", fg = "#42BFFA" },
+	
+	# Special files - cyan
+	{ name = "*", fg = "#87CEEB" },
+]
+
+[icon]
+# Common file types with Xcode-ish colors
+files = [
+	{ name = "package.json", text = "", fg = "#6BD089" },
+	{ name = ".gitignore", text = "", fg = "#FC6A5D" },
+	{ name = ".gitconfig", text = "", fg = "#FC6A5D" },
+	{ name = "LICENSE", text = "", fg = "#FDD835" },
+	{ name = "README.md", text = "", fg = "#42BFFA" },
+	{ name = "Cargo.toml", text = "", fg = "#FC6A5D" },
+	{ name = "Dockerfile", text = "", fg = "#42BFFA" },
+]
+
+# Extensions - Xcode inspired colors for common file types
+exts = [
+	# Programming - Swift/Apple
+	{ name = "swift", text = "", fg = "#FC6A5D" },
+	{ name = "m", text = "", fg = "#42BFFA" },
+	{ name = "h", text = "", fg = "#D782F0" },
+	
+	# Web
+	{ name = "js", text = "", fg = "#FDD835" },
+	{ name = "ts", text = "", fg = "#42BFFA" },
+	{ name = "jsx", text = "", fg = "#87CEEB" },
+	{ name = "tsx", text = "", fg = "#87CEEB" },
+	{ name = "html", text = "", fg = "#FC6A5D" },
+	{ name = "css", text = "", fg = "#42BFFA" },
+	{ name = "scss", text = "", fg = "#D782F0" },
+	
+	# Systems
+	{ name = "rs", text = "", fg = "#FC6A5D" },
+	{ name = "go", text = "", fg = "#42BFFA" },
+	{ name = "py", text = "", fg = "#FDD835" },
+	{ name = "rb", text = "", fg = "#FC6A5D" },
+	
+	# Data
+	{ name = "json", text = "", fg = "#FDD835" },
+	{ name = "toml", text = "", fg = "#6BD089" },
+	{ name = "yaml", text = "", fg = "#D782F0" },
+	{ name = "yml", text = "", fg = "#D782F0" },
+	
+	# Media
+	{ name = "png", text = "", fg = "#D782F0" },
+	{ name = "jpg", text = "", fg = "#D782F0" },
+	{ name = "jpeg", text = "", fg = "#D782F0" },
+	{ name = "gif", text = "", fg = "#D782F0" },
+	{ name = "svg", text = "", fg = "#42BFFA" },
+	{ name = "mp4", text = "", fg = "#FC6A5D" },
+	{ name = "mp3", text = "", fg = "#6BD089" },
+	
+	# Archives
+	{ name = "zip", text = "", fg = "#FDD835" },
+	{ name = "tar", text = "", fg = "#FDD835" },
+	{ name = "gz", text = "", fg = "#FDD835" },
+	
+	# Documents
+	{ name = "pdf", text = "", fg = "#FC6A5D" },
+	{ name = "md", text = "", fg = "#42BFFA" },
+	{ name = "txt", text = "", fg = "#DCDFE4" },
+]
+
+# Common directory names with icons
+dirs = [
+	{ name = ".git", text = "", fg = "#FC6A5D" },
+	{ name = "node_modules", text = "", fg = "#6BD089" },
+	{ name = ".config", text = "", fg = "#42BFFA" },
+	{ name = "src", text = "", fg = "#42BFFA" },
+	{ name = "dist", text = "", fg = "#FDD835" },
+	{ name = "build", text = "", fg = "#FDD835" },
+	{ name = "target", text = "", fg = "#FC6A5D" },
+	{ name = "Desktop", text = "", fg = "#42BFFA" },
+	{ name = "Documents", text = "", fg = "#6BD089" },
+	{ name = "Downloads", text = "", fg = "#FDD835" },
+	{ name = "Pictures", text = "", fg = "#D782F0" },
+	{ name = "Music", text = "", fg = "#FC6A5D" },
+]

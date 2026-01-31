@@ -1,0 +1,29 @@
+[[manager.prepend_keymap]]
+on   = "z"
+desc = "Jump to file/directory via tv"
+run  = """
+shell '
+	selected=$(tv files)
+	if [ -n "$selected" ]; then
+		if [ -d "$selected" ]; then
+			ya pub dds-cd --str "$selected"
+		else
+			dir=$(dirname "$selected")
+			ya pub dds-cd --str "$dir"
+			ya pub dds-reveal --str "$selected"
+		fi
+	fi
+' --block --confirm
+"""
+
+[[manager.prepend_keymap]]
+on   = "Z"
+desc = "Jump to directory via tv"
+run  = """
+shell '
+	selected=$(tv dirs)
+	if [ -n "$selected" ]; then
+		ya pub dds-cd --str "$selected"
+	fi
+' --block --confirm
+"""

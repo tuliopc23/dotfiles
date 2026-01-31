@@ -1,0 +1,6 @@
+# Theme is set via BAT_THEME environment variable to sync with terminal theme
+--style=numbers,changes,grid,header
+--tabs=4
+--wrap=character
+--decorations=always
+--italic-text=always

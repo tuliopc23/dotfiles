@@ -1,0 +1,63 @@
+[[manager.prepend_keymap]]
+on   = "z"
+desc = "Jump to file/directory via tv"
+run  = """
+shell '
+	tmp=$(mktemp)
+	
+	# Explicitly specify files channel and force output format
+	tv files --source-output "{}" > "$tmp"
+	code=$?
+	
+	if [ $code -ne 0 ]; then
+		echo "Error: tv exited with code $code"
+		rm -f "$tmp"
+		exit 0
+	fi
+
+	if [ -s "$tmp" ]; then
+		selected=$(cat "$tmp")
+		rm -f "$tmp"
+		
+		if [ -d "$selected" ]; then
+			ya pub dds-cd --str "$selected"
+		else
+			dir=$(dirname "$selected")
+			ya pub dds-cd --str "$dir"
+			ya pub dds-reveal --str "$selected"
+		fi
+	else
+		echo "No selection made (empty output)."
+		rm -f "$tmp"
+	fi
+' --block --confirm
+"""
+
+[[manager.prepend_keymap]]
+on   = "Z"
+desc = "Jump to directory via tv"
+run  = """
+shell '
+	tmp=$(mktemp)
+	
+	# Explicitly specify dirs channel and force output format
+	tv dirs --source-output "{}" > "$tmp"
+	code=$?
+	
+	if [ $code -ne 0 ]; then
+		echo "Error: tv exited with code $code"
+		rm -f "$tmp"
+		exit 0
+	fi
+
+	if [ -s "$tmp" ]; then
+		selected=$(cat "$tmp")
+		rm -f "$tmp"
+		
+		ya pub dds-cd --str "$selected"
+	else
+		echo "No selection made."
+		rm -f "$tmp"
+	fi
+' --block --confirm
+"""

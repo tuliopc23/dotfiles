@@ -1,0 +1,62 @@
+[[manager.prepend_keymap]]
+on   = "z"
+desc = "Jump to file/directory via tv"
+run  = """
+shell '
+	tmp=$(mktemp)
+	tv files > "$tmp"
+	code=$?
+	
+	if [ $code -ne 0 ]; then
+		rm -f "$tmp"
+		# If code is 130 (SIGINT/Cancel), just exit. 
+		# If 1 (Error), maybe print it?
+		exit 0
+	fi
+
+	if [ -s "$tmp" ]; then
+		selected=$(cat "$tmp")
+		rm -f "$tmp"
+		
+		# Log for debugging (visible due to --confirm)
+		echo "Selected: $selected"
+
+		if [ -d "$selected" ]; then
+			ya pub dds-cd --str "$selected"
+		else
+			dir=$(dirname "$selected")
+			ya pub dds-cd --str "$dir"
+			ya pub dds-reveal --str "$selected"
+		fi
+	else
+		rm -f "$tmp"
+	fi
+' --block --confirm
+"""
+
+[[manager.prepend_keymap]]
+on   = "Z"
+desc = "Jump to directory via tv"
+run  = """
+shell '
+	tmp=$(mktemp)
+	tv dirs > "$tmp"
+	code=$?
+
+	if [ $code -ne 0 ]; then
+		rm -f "$tmp"
+		exit 0
+	fi
+
+	if [ -s "$tmp" ]; then
+		selected=$(cat "$tmp")
+		rm -f "$tmp"
+		
+		echo "Selected: $selected"
+		
+		ya pub dds-cd --str "$selected"
+	else
+		rm -f "$tmp"
+	fi
+' --block --confirm
+"""

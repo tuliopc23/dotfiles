@@ -1,0 +1,30 @@
+{
+  "fill" : {
+    "automatic-gradient" : "display-p3:0.02727,0.06353,0.11904,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "ghostty.svg",
+          "name" : "ghostty",
+          "opacity" : 0.8
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

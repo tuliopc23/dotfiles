@@ -1,0 +1,228 @@
+# config.fish
+
+if status is-interactive
+    # -----------------
+    # Environment Variables (Fish-way)
+    # -----------------
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+    set -gx PAGER bat
+    set -gx BAT_THEME ansi
+    set -gx FEX_DEFAULT_COMMAND "fex --time-type modified"
+    set -gx XDG_CONFIG_HOME "$HOME/.config"
+    # AWS Configuration
+    set -gx AWS_PROFILE default
+    set -gx AWS_DEFAULT_REGION us-east-1
+    set -gx AWS_REGION us-east-1
+
+    # Path Additions
+    fish_add_path -p $HOME/.cargo/bin $HOME/.local/bin /opt/homebrew/bin $HOME/bin $HOME/.bun/bin $HOME/.lmstudio/bin /Users/tuliopinheirocunha/.fex/bin
+    # -----------------
+    # Tool Initialization
+    # -----------------
+    # Homebrew (Static for speed)
+    set -gx HOMEBREW_PREFIX /opt/homebrew
+    set -gx HOMEBREW_CELLAR /opt/homebrew/Cellar
+    set -gx HOMEBREW_REPOSITORY /opt/homebrew
+    set -gx MANPATH /opt/homebrew/share/man $MANPATH
+    set -gx INFOPATH /opt/homebrew/share/info $INFOPATH
+    fish_add_path -p /opt/homebrew/bin /opt/homebrew/sbin
+
+    # Atuin (Cached)
+    _gemini_load_cached_tool atuin "atuin init fish" "00_atuin_init.fish"
+
+    # Oh My Posh (Direct Load to ensure prompt definition)
+    oh-my-posh init fish --config ~/.mytheme.omp.json | source
+
+    # Cursor (opt-in to avoid slow init / errors)
+    if test -x $HOME/.local/bin/cursor-agent; and set -q CURSOR_AGENT_ENABLE
+        $HOME/.local/bin/cursor-agent shell-integration fish | source
+    end
+
+    # Vi mode + blinking cursor shapes
+    fish_vi_key_bindings
+    set -g fish_cursor_default block-blink
+    set -g fish_cursor_insert line-blink
+    set -g fish_cursor_visual block-blink
+    set -g fish_cursor_replace_one underscore-blink
+    # Tv (Cached)
+    _gemini_load_cached_tool tv "tv init fish" "00_tv_init.fish"
+
+    # -----------------
+    # UV Configuration (Gemini Added)
+    # -----------------
+    # Enforce uv as the exclusive Python manager
+    alias pip="uv pip"
+    alias pip3="uv pip"
+    alias python="uv run python"
+    alias venv="uv venv"
+    alias py="uv run python"
+
+    # -----------------
+    # Unified Aliases (Modern Replacements)
+    # -----------------
+    alias ls="eza"
+    alias cat="bat"
+    alias find="fd"
+    alias grep="rg"
+    alias ps="procs"
+
+    # Common Aliases
+    alias ll="eza -la"
+    alias la="eza -A"
+    alias l="eza -CF"
+    alias md="mkdir -p"
+    alias ..="cd .."
+    alias ...="cd ../.."
+
+    # Neovim Aliases (use env so NVIM_APPNAME is set in Fish)
+    set -gx NVIM_APPNAME nvim
+    alias nvc="env NVIM_APPNAME=nvchad nvim"
+    alias vim="nvim"
+    alias avim="env NVIM_APPNAME=avim nvim"
+    alias nvchad="env NVIM_APPNAME=nvchad nvim"
+    alias kickvim="env NVIM_APPNAME=kickvim nvim"
+
+    # mini as function so NVIM_APPNAME points to the mini config dir
+    function mini
+        env NVIM_APPNAME=mini nvim $argv
+    end
+
+    # Emacs-mac + Doom (single config: Doom only)
+    set -gx EMACS_BIN "/Applications/Emacs.app/Contents/MacOS/Emacs"
+    set -gx EMACSCLIENT_BIN "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+    set -gx DOOMDIR "$HOME/.doom.d"
+    set -gx EMACS_INIT_DIR "$HOME/.emacs.d"
+    set -gx ALTERNATE_EDITOR "$EMACS_BIN --init-directory $EMACS_INIT_DIR --daemon=doom"
+    fish_add_path -p "/Applications/Emacs.app/Contents/MacOS/bin"
+
+    # Start Doom daemon at shell login (socket "doom")
+    $EMACSCLIENT_BIN -s doom -e 0 2>/dev/null; or $EMACS_BIN --init-directory $EMACS_INIT_DIR --daemon=doom 2>/dev/null &
+
+    # Emacs GUI (e) - Doom; create new frame, no-wait
+    function e
+        $EMACSCLIENT_BIN -s doom -c -n -a "" $argv
+        osascript -e 'tell application "Emacs" to activate'
+    end
+
+    # Emacs Terminal (et) - Doom in current terminal
+    function et
+        $EMACSCLIENT_BIN -s doom -t -a "" $argv
+    end
+
+    # Emacs client shorthand (same as e — GUI client)
+    function ec
+        e $argv
+    end
+
+    # Standard emacs command → use GUI client
+    function emacs
+        e $argv
+    end
+    function avante
+        nvim -c 'lua vim.defer_fn(function()require("avante.api").zen_mode()end, 100)'
+    end
+
+    # Yazi Wrapper
+    function y
+        set tmp (mktemp -t "yazi-cwd.XXXXXX")
+        yazi $argv --cwd-file="$tmp"
+        if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            builtin cd -- "$cwd"
+        end
+        rm -f -- "$tmp"
+    end
+
+    # Tere directory navigator
+    function tere
+        set --local result (command tere $argv)
+        [ -n "$result" ] && cd -- "$result"
+    end
+
+    # Broot
+    if test -f /Users/tuliopinheirocunha/.config/broot/launcher/fish/br
+        source /Users/tuliopinheirocunha/.config/broot/launcher/fish/br
+    end
+
+    # x-cmd (binaries only - full shell integration requires bash/zsh)
+    fish_add_path -p "$HOME/.x-cmd.root/bin"
+    alias x="x-cmd"
+
+    # Greeting
+    function fish_greeting
+        printf "󰌢  MacBook Pro: Apple Silicon\n"
+        printf "󰸘  Today is %s   󰅐  %s\n" (date "+%A, %B %d, %Y") (date "+%H:%M")
+        printf "󱓟  We were going live baby! Flying High!\n"
+    end
+end
+
+# User Abbreviations (Restored)
+if status is-interactive
+    abbr -a bs brew search
+    abbr -a bi brew install
+    abbr -a bri brew reinstall
+    abbr -a bunn brew uninstall
+    abbr -a bu brew update
+    abbr -a bg brew upgrade
+    abbr -a bup "brew update && brew upgrade"
+    abbr -a top topgrade
+    abbr -a g git
+    abbr -a ga git add
+    abbr -a gaa git add --all
+    abbr -a gc git commit -v
+    abbr -a gcm git commit -m
+    abbr -a gco git checkout
+    abbr -a gd git diff
+    abbr -a gp git push
+    abbr -a gl git pull
+    abbr -a gst git status
+    abbr -a gb git branch
+    abbr -a wpar warp-preview agent run --profile hEdIVVybmMdjW1T8ZUPfV0 --prompt
+    # System & Files
+    abbr -a c clear
+    abbr -a ex exit
+    abbr -a cx chmod +x
+    abbr -a ch chmod
+    abbr -a md mkdir -p
+
+    # Ripgrep
+    abbr -a r rg
+    abbr -a ri rg -i
+    abbr -a rf rg --files
+
+    # Ast-grep
+    abbr -a sg ast-grep
+    abbr -a sgn ast-grep new
+    abbr -a sgs ast-grep scan
+    abbr -a sgr ast-grep run
+
+    # Eza / Listing
+    abbr -a lt eza --tree --level=2
+
+    # Flow Editor
+    abbr -a fl flow
+end
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+
+# opencode
+fish_add_path /Users/tuliopinheirocunha/.opencode/bin
+
+source /Users/tuliopinheirocunha/.config/op/plugins.sh
+
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/tuliopinheirocunha/.lmstudio/bin
+# End of LM Studio CLI section
+
+# ProxyPal - Amp CLI Configuration (alternative to settings.json)
+export AMP_URL="http://localhost:8317"
+export AMP_API_KEY="proxypal-local"
+
+# For Amp cloud features, get your API key from https://ampcode.com/settings
+# and add it to ProxyPal Settings > Amp CLI Integration > Amp API Key
+
+# Emacs Terminal Alias
+alias et="emacsclient -t -a ''"

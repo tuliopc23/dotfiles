@@ -1,0 +1,77 @@
+[[plugin.deps]]
+use = "wylie102/duckdb"
+rev = "3f8c863"
+hash = "87b9233a74325e95011670ed20bbd0d4"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "d078b01"
+hash = "56fdabc96fc1f4d53c96eb884b02a5be"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "d078b01"
+hash = "3996fc74044bc44144b323686f887e1"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "d078b01"
+hash = "8a7c58225816a163a6e8730c0adafbc8"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "d078b01"
+hash = "ce67445ebb1bf3d97b8e44f50904b2c5"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "d078b01"
+hash = "270915fa8282a19908449530ff66f7e2"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "d078b01"
+hash = "f1967e991e727ce45b1be5e8f0d1ff8e"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:piper"
+rev = "d078b01"
+hash = "25aee698dd1081001008ce0cb1cc4da3"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-filter"
+rev = "d078b01"
+hash = "407d19bc4fb46eff5fa8ff8337644847"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "d078b01"
+hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mactag"
+rev = "d078b01"
+hash = "1f75c3efbba45c1289f06676145c0d98"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+rev = "d078b01"
+hash = "7b7dc677b58371da6fc63e4fcd134651"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-paste"
+rev = "d078b01"
+hash = "75fd60b2df7115e0a6ca31a6a804d320"
+
+[[plugin.deps]]
+use = "uhs-robert/sshfs"
+rev = "5edff3b"
+hash = "e92138f6eb884bef96d92b2d114ac927"
+
+[[plugin.deps]]
+use = "hankertrix/augment-command"
+rev = "7c12bdf"
+hash = "f7e6d377e4efee567ec6d1c2355f2ca3"
+
+[flavor]
+deps = []

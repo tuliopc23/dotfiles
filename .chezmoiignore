@@ -1,0 +1,29 @@
+# AI Agents (Local Only)
+.claude
+.claude.json
+private_dot_claude
+private_dot_claude.json
+.codex
+private_dot_codex
+.factory
+private_dot_factory
+.config/opencode
+dot_config/opencode
+
+# Secrets & Local State
+.ssh/id_*
+.ssh/known_hosts
+.netrc
+.npmrc
+.zsh_history
+.bash_history
+.python_history
+.config/fish/fish_variables
+.config/fish/conf.d/bedrock.fish
+dot_config/fish/fish_variables
+dot_config/fish/conf.d/bedrock.fish
+
+# Cloud Storage / Duplicate management
+Library/CloudStorage
+GoogleDrive*
+"My Drive"

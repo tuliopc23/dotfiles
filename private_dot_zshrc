@@ -1,0 +1,277 @@
+# Source unified environment variables
+[[ -f ~/.profile ]] && source ~/.profile
+
+# AWS Configuration
+export AWS_PROFILE=default
+export AWS_DEFAULT_REGION=us-east-1
+
+# Enable Powerlevel10k instant prompt (if used, though we are moving to OMP)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+### Zinit Installer & Init
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git"
+fi
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps[zinit]} )) || _comps[zinit]=_zinit
+
+# -----------------
+# Zinit Turbo Mode
+# -----------------
+zinit wait lucid for \
+ atinit"zicompinit; zicdreplay" \
+    zsh-users/zsh-completions
+
+zinit wait lucid for \
+    zsh-users/zsh-syntax-highlighting \
+    zsh-users/zsh-autosuggestions \
+    zsh-users/zsh-history-substring-search \
+    OMZP::git \
+    OMZP::colored-man-pages \
+    OMZP::command-not-found \
+    OMZP::fzf
+
+# -----------------
+# Settings & Bindings
+# -----------------
+setopt HIST_IGNORE_ALL_DUPS
+bindkey -v
+
+# Vi mode cursor shapes (blinking)
+_zsh_cursor_block() { printf '\e[?12h\e[?25h\e[1 q'; }    # blinking block
+_zsh_cursor_bar() { printf '\e[?12h\e[?25h\e[5 q'; }      # blinking bar
+_zsh_cursor_underline() { printf '\e[?12h\e[?25h\e[3 q'; } # blinking underline
+
+zle-line-init() { _zsh_cursor_bar; }
+zle-keymap-select() {
+  case $KEYMAP in
+    vicmd|viopp) _zsh_cursor_block ;; 
+    visual) _zsh_cursor_underline ;; 
+    viins|main) _zsh_cursor_bar ;; 
+    *) _zsh_cursor_block ;; 
+  esac
+}
+zle-line-finish() { _zsh_cursor_block; }
+zle -N zle-line-init
+zle -N zle-keymap-select
+zle -N zle-line-finish
+
+# Tab accept suggestion
+_accept_autosuggestion_or_complete() {
+  if [[ -n "$POSTDISPLAY" ]]; then
+    zle autosuggest-accept
+  else
+    zle expand-or-complete
+  fi
+}
+zle -N _accept_autosuggestion_or_complete
+bindkey '^I' _accept_autosuggestion_or_complete
+
+# -----------------
+# Unified Aliases (Modern Replacements)
+# -----------------
+alias ls="eza"
+alias cat="bat"
+alias find="fd"
+alias grep="rg"
+alias ps="procs"
+alias cd="z"
+
+# Common Aliases
+alias ll="ls -la"
+alias la="ls -A"
+alias l="ls -CF"
+alias md="mkdir -p"
+alias ..="cd .."
+alias ...="cd ../.."
+
+# Neovim Aliases
+export NVIM_APPNAME=nvim
+alias nvc="NVIM_APPNAME=nvchad nvim"
+alias vim="nvim"
+alias avim="NVIM_APPNAME=avim nvim"
+alias nvchad="NVIM_APPNAME=nvchad nvim"
+alias kickvim="NVIM_APPNAME=kickvim nvim"
+alias minivim="NVIM_APPNAME=minivim nvim"
+alias vimr="NVIM_APPNAME=vimr /Applications/VimR.app/Contents/Resources/vimr --cur-env"
+
+## Yazi Wrapper (Shell Integration)
+function y() {
+	local tmp="$(mktemp -t \"yazi-cwd.XXXXXX\")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# Tere directory navigator
+tere() {
+	local result=$(command tere "$@")
+	[ -n "$result" ] && cd -- "$result"
+}
+
+# -----------------
+# Tool Initialization
+# -----------------
+eval "$(zoxide init zsh)"
+command -v atuin &>/dev/null && eval "$(atuin init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.mytheme.omp.json)"
+
+# Cursor Integration (opt-in to avoid slow init / errors)
+if [[ -n "$CURSOR_AGENT_ENABLE" && -x "$HOME/.local/bin/cursor-agent" ]]; then
+  eval "$($HOME/.local/bin/cursor-agent shell-integration zsh 2>/dev/null)"
+fi
+
+# User Abbreviations (Restored)
+alias bi="brew install"
+alias bri="brew reinstall"
+alias bunn="brew uninstall"
+alias bu="brew update"
+alias bg="brew upgrade"
+alias g="git"
+alias ga="git add"
+alias gaa="git add --all"
+alias gc="git commit -v"
+alias gcm="git commit -m"
+alias gco="git checkout"
+alias gd="git diff"
+alias gp="git push"
+alias gl="git pull"
+alias gst="git status"
+alias gb="git branch"
+
+# -----------------
+# x-cmd Configuration
+# -----------------
+# Boot x-cmd (full shell integration)
+[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X"
+
+# x-cmd aliases for quick access
+alias xenv="x env"           # Environment management
+alias xpkg="x pkg"           # Package management
+alias xup="x upgrade"        # Upgrade x-cmd
+alias xtldr="x tldr"         # Quick command help
+alias xhub="x hub"           # Browse available tools
+
+# x-cmd environment shortcuts
+alias xnode="x env use node"
+alias xpython="x env use python"
+alias xgo="x env use go"
+alias xrust="x env use rust"
+alias xdeno="x env use deno"
+alias xjava="x env use java"
+
+# x-cmd tool enhancements
+alias xg="x git"             # Enhanced git
+alias xd="x docker"          # Enhanced docker
+alias xb="x brew"            # Enhanced brew
+alias xnpm="x npm"           # Enhanced npm
+alias xbun="x bun"           # Enhanced bun
+
+# x-cmd search & info
+alias xs="x pkg search"      # Search packages
+alias xls="x env ls"         # List installed envs
+alias xinfo="x pkg info"     # Package info
+
+# Useful x-cmd functions
+# Quick install and use an environment
+xuse() {
+    x env use "$1" && echo "✓ $1 environment ready"
+}
+
+# Search and preview package info
+xfind() {
+    local pkg=$(x pkg search "$1" | fzf --preview "x pkg info {1}" --preview-window=right:60%)
+    [ -n "$pkg" ] && x pkg info "$pkg"
+}
+
+# Quick tldr with fzf selection
+xtl() {
+    if [ -z "$1" ]; then
+        local cmd=$(x tldr --list 2>/dev/null | fzf --preview "x tldr {}")
+        [ -n "$cmd" ] && x tldr "$cmd"
+    else
+        x tldr "$@"
+    fi
+}
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
+
+# Emacs Configuration (Doom Emacs with daemon)
+export EMACS_BIN="/Applications/Emacs.app/Contents/MacOS/Emacs"
+export EMACSCLIENT_BIN="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+export PATH="/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
+
+# Helper: ensure daemon is running
+_ensure_emacs_daemon() {
+    if ! "$EMACSCLIENT_BIN" -e "(+ 1 1)" &>/dev/null; then
+        echo "Starting Emacs daemon..."
+        "$EMACS_BIN" --daemon
+    fi
+}
+
+# Emacs GUI (e) - Create new frame, no-wait
+e() {
+    _ensure_emacs_daemon
+    "$EMACSCLIENT_BIN" -c -n "$@"
+    osascript -e 'tell application "Emacs" to activate'
+}
+
+# Emacs Terminal (et) - Attach in current terminal
+et() {
+    _ensure_emacs_daemon
+    "$EMACSCLIENT_BIN" -t "$@"
+}
+
+# Emacs client shorthand (ec) — same as e, GUI client
+ec() {
+    e "$@"
+}
+
+# Standard emacs command → use GUI client
+emacs() {
+    e "$@"
+}
+
+# Kill Emacs daemon
+ek() {
+    "$EMACSCLIENT_BIN" -e "(kill-emacs)" 2>/dev/null || echo "No daemon running"
+}
+
+# Restart Emacs daemon
+er() {
+    ek
+    sleep 1
+    _ensure_emacs_daemon
+    echo "Emacs daemon restarted"
+}
+
+
+
+# Isolated Amp instance (Direct connection, separate config)
+alias amp2="mkdir -p $HOME/.config/amp2-config && env XDG_CONFIG_HOME=$HOME/.config/amp2-config AMP_URL=\"\" AMP_API_KEY=\"\" amp"
+
+# -----------------
+# UV Configuration (Gemini Added)
+# -----------------
+# Enforce uv as the exclusive Python manager
+alias pip="uv pip"
+alias pip3="uv pip"
+alias python="uv run python"
+alias venv="uv venv"
+alias py="uv run python"
+
+# Ensure uv tools are in PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/tuliopinheirocunha/.lmstudio/bin"
+# End of LM Studio CLI section
+

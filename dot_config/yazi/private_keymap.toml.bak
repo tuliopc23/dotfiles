@@ -1,0 +1,94 @@
+# ============================================================================
+# YAZI KEYMAP CONFIGURATION
+# Organized by function with zoxide integration and plugin support
+# ============================================================================
+
+# NAVIGATION
+# ==========
+
+# Search/Filter
+[[mgr.prepend_keymap]]
+on   = "<C-f>"
+run  = "search --via=fd"
+desc = "Search files by name (via fd)"
+
+# FZF File Search (Recursive)
+[[mgr.prepend_keymap]]
+on   = "<C-p>"
+run  = "plugin fg"
+desc = "Find file"
+
+# FZF Content Search (Ripgrep)
+[[mgr.prepend_keymap]]
+on   = "<C-s>"
+run  = "plugin fg --args='rg'"
+desc = "Find in files (ripgrep)"
+
+# Zoxide - Jump to frequently used directories
+[[mgr.prepend_keymap]]
+on   = "z"
+run  = "plugin zoxide"
+desc = "Jump to directory (zoxide)"
+
+# Jump to char in file list (fast navigation within current view)
+[[mgr.prepend_keymap]]
+on   = "f"
+run  = "plugin jump-to-char"
+desc = "Jump to char in current list"
+
+# FILE OPERATIONS
+# ===============
+
+# Smart enter - context aware file/directory opening
+[[mgr.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Open file or enter directory"
+
+[[mgr.prepend_keymap]]
+on   = "<Enter>"
+run  = "plugin smart-enter"
+desc = "Open file or enter directory (Enter)"
+
+# Filter with smart highlighting
+[[mgr.prepend_keymap]]
+on   = "F"
+run  = "plugin smart-filter"
+desc = "Smart filter (fuzzy search in list)"
+
+# DISPLAY & LAYOUT
+# ================
+
+# Toggle preview pane
+[[mgr.prepend_keymap]]
+on   = "T"
+run  = "plugin toggle-pane min-preview"
+desc = "Toggle preview pane"
+
+# FILE/SYSTEM MANAGEMENT
+# ======================
+
+# Mount/unmount volumes (macOS-friendly)
+[[mgr.prepend_keymap]]
+on  = "M"
+run = "plugin mount"
+desc = "Mount/unmount volumes"
+
+# File permissions
+[[mgr.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Change permissions (chmod)"
+
+# MACOS TAGS (Finder integration)
+# ================================
+
+[[mgr.prepend_keymap]]
+on   = [ "b", "a" ]
+run  = "plugin mactag add"
+desc = "Add macOS tag to files"
+
+[[mgr.prepend_keymap]]
+on   = [ "b", "r" ]
+run  = "plugin mactag remove"
+desc = "Remove macOS tag from files"

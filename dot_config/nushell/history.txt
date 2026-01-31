@@ -1,0 +1,371 @@
+which brew
+brew upgrade
+ls
+rg --files .Swift
+nu --help
+nu plugins
+nu-plugin
+nu plugin
+cd $nu.default-config-path<\n>git clone git@github.com:selfagency/bru.git<\n>vi config.nu
+z
+z .config/nu
+bru
+ls
+bru
+bew
+brew
+z ca
+atuin
+cd ˜/.config/nushell
+broot install
+broot --install.
+broot --install
+br
+zoxide init nushell | save -f ~/.zoxide.nu
+yaz
+yazi
+z
+z ca
+zoxide
+zi
+mkdir ($nu.data-dir | path join "vendor/autoload") starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+gemini
+starthip
+starship
+starship completions
+starship completions nu
+starship completions nushell
+starship
+starship config
+z nu
+git clone https://github.com/nushell/nightly.git; cd nightly<\n># or download the file alone<\n>http get https://raw.githubusercontent.com/nushell/nightly/nightly/toolkit.nu | save --force toolkit.nu
+z
+cd
+git clone https://github.com/nushell/nightly.git; cd nightly<\n># or download the file alone<\n>http get https://raw.githubusercontent.com/nushell/nightly/nightly/toolkit.nu | save --force toolkit.nu
+overlay use --reload --prefix toolkit.nu as tk
+tk get-latest-nightly-build --help
+overlay use --reload --prefix toolkit.nu as tk
+tk get-latest-nightly-build --help
+tk get-latest-nightly-build
+rg --files .Swift
+rg --files Cardmaniacs
+oh-my-posh init nu
+gemini
+z
+zoxide --help
+oh-my-posh -h
+oh-my-posh config
+oh-my-posh config edit
+z ca
+zi
+zoxide init nushell | save -f ~/.zoxide.nu
+$nu.config-path
+agent
+cursor-agent
+$nu.config-path
+nvim /Users/tuliopinheirocunha/Library/Application Support/nushell/config.nu
+z
+$nu.config-path
+nvim /Users/tuliopinheirocunha/Library/Application Support/nushell/config.nu
+z
+zoxide init nushell | save -f ~/.zoxide.nu
+nvim /Users/tuliopinheirocunha/Library/Application Support/nushell/config.nu
+ls /Users/tuliopinheirocunha/Library/Application Support/nushell/
+ls -la /Users/tuliopinheirocunha/Library/Application Support/nushell/
+yazi /Users/tuliopinheirocunha/Library/Application Support/nushell/
+yazi /Users/tuliopinheirocunha/Library/ApplicationSupport/nushell/
+z
+z ca
+z
+z ca
+z 
+oh-my-posh init nu
+oh-my-posh init nu --help
+$nu.config-path
+z ca
+ls
+z ca
+z
+z ca
+pkill -9 -f "swift-frontend" 2>/dev/null; \<\n>pkill -9 -f "xcodebuild" 2>/dev/null; \<\n>pkill -9 -f "swift-build" 2>/dev/null; \<\n>pkill -9 -f "swift build" 2>/dev/null; \<\n>sleep 2; \<\n>echo "Killed any lingering build processes"<\n>
+z ca
+gk status
+z ca
+config nu
+zsh
+z ca
+ls
+fd 
+tuist xcodebuild build -workspace Cardmaniacs.xcworkspace -scheme BookmarksFeature -destination 'platform=macOS' | xcbeautify
+use nupm/nupm<\n>nupm install nupm --force --path
+nupm install --force --path
+nnu
+ls
+ls -la
+oh-my-posh 
+oh-my-posh shell
+oh-my-posh shell get
+ls
+z nushe
+ls
+z
+ls | find .config
+nupm install --force --path
+nupm install --force --
+agent
+git clone https://github.com/FMotalleb/nu_plugin_desktop_notifications.git  <\n>nupm install --path nu_plugin_desktop_notifications -f  
+z nu
+z nushe
+$nu.config-path
+y
+ls | find nupm
+rm -rf nupm_old
+ls | find topgrade.toml
+z .congig
+z config
+ls | find topgrade.toml
+nvim topgrade.toml
+ls | find elvish
+ls | find .elvish
+mkdir elvish
+12 | into int
+date now | date to-timezone "Europe/London"
+[[framework, language]; [Django, Python] [Laravel, PHP]]
+gk clone https://github.com/mattwparas/helix/tree/steel-event-system
+z
+git clone https://github.com/mattwparas/helix/tree/steel-event-system
+ls
+z ca
+ls
+z  /Users/tuliopinheirocunha/Cardmaniacs/Projects/Modules/BookmarksFeature/
+ls
+z
+z ca
+z Sources
+ls
+z modules
+ls
+z bookmark
+ls
+pwd
+z
+z ca
+z sources
+ls
+ls | find Dependencies
+y
+gstat
+polar
+polars
+polars count-null
+pkill -9 -f "swift-frontend" 2>/dev/null; \<\n>pkill -9 -f "xcodebuild" 2>/dev/null; \<\n>pkill -9 -f "swift-build" 2>/dev/null; \<\n>pkill -9 -f "swift build" 2>/dev/null; \<\n>sleep 2; \<\n>echo "Killed any lingering build processes"<\n>
+dirs
+dir
+cd
+ls dirs
+ls
+dirs add Cardmaniacs
+nupm install https://github.com/FMotalleb/nu_plugin_clipboard
+nupm search
+nupm search clipboard
+git clone https://github.com/FMotalleb/nu_plugin_clipboard.git<\n>nupm install --path nu_plugin_clipboard -f
+ls 
+ls | nu_plugin
+ls | find nu_plugin
+rm -rf │ nu_plugin_clipboard
+git clone https://github.com/FMotalleb/nu_plugin_clipboard.git<\n>nupm install --path nu_plugin_clipboard -f
+gk clone https://github.com/dead10ck/nu_plugin_dns
+nupm install --nu-plugin-dns
+nupm install --path nu_plugin_dns
+ls | find nu_plugin
+nupm install --path nu_plugin_dns -f
+nupm install --path  ./nu_plugin_dns
+cargo install nu_plugin_dns<\n>plugin add $"($env.CARGO_HOME)/bin/nu_plugin_dns"<\n>plugin use dns
+git clone https://github.com/FMotalleb/nu_plugin_desktop_notifications.git  <\n>nupm install --path nu_plugin_desktop_notifications -f  
+ls
+let raw = "/tmp/xcodebuild.raw.log"<\n>rm -f $raw<\n><\n>env NSUnbufferedIO=YES tuist xcodebuild build `<\n>  -workspace Cardmaniacs.xcworkspace `<\n>  -scheme FeedFeature `<\n>  -destination 'generic/platform=macOS' `<\n>  2>&1<\n>| tee $raw<\n>| xcbeautify
+cd sources
+y
+ls
+swiftc -typecheck SmartlistResultsVieModel.swift
+pwd
+swiftc -typecheck /Users/tuliopinheirocunha/Cardmaniacs/Sources/Modules/FeedFeature/SmartLists/SmartlistToast.swift
+let raw = "/tmp/xcodebuild.raw.log"; rm -f $raw; env NSUnbufferedIO=YES tuist xcodebuild build -workspace Cardmaniacs.xcworkspace -scheme FeedFeature -destination "generic/platform=macOS" | complete | get stderr stdout | str join | tee $raw | xcbeautify
+(<\n>  let raw = "/tmp/xcodebuild.raw.log"<\n>  rm -f $raw<\n>  env NSUnbufferedIO=YES tuist xcodebuild build -workspace Cardmaniacs.xcworkspace -scheme FeedFeature -destination "generic/platform=macOS"<\n>  | complete<\n>  | get stderr stdout<\n>  | str join<\n>  | tee $raw<\n>  | xcbeautify<\n>)
+rm -f /tmp/xcodebuild.raw.log<\n><\n>with-env { NSUnbufferedIO: "YES" } {<\n>  tuist xcodebuild build -workspace Cardmaniacs.xcworkspace -scheme FeedFeature -destination "generic/platform=macOS"<\n>}<\n>| complete<\n>| get stderr stdout<\n>| str join<\n>| tee /tmp/xcodebuild.raw.log<\n>| xcbeautify
+rm -f /tmp/xcodebuild.raw.log; with-env { NSUnbufferedIO: "YES" } { tuist xcodebuild build -workspace Cardmaniacs.xcworkspace -scheme FeedFeature -destination "generic/platform=macOS" } | complete | get stderr stdout | str join | tee /tmp/xcodebuild.raw.log | xcbeautify
+ls 
+pkill -9 -f "swift-frontend" 2>/dev/null; \<\n>pkill -9 -f "xcodebuild" 2>/dev/null; \<\n>pkill -9 -f "swift-build" 2>/dev/null; \<\n>pkill -9 -f "swift build" 2>/dev/null; \<\n>sleep 2; \<\n>echo "Killed any lingering build processes"<\n>
+ps
+ps | grep swift
+ps | find sift
+ps | find swift
+ls 
+highlight Tuist.sift
+highlight Tuist.swift
+polars 
+polars
+ls
+ls | xonsh
+ls | find xonsh
+z .config
+ls | find xonsh
+cd xonsh
+ls
+pkill -9 -f "swift-frontend" 2>/dev/null; \<\n>pkill -9 -f "xcodebuild" 2>/dev/null; \<\n>pkill -9 -f "swift-build" 2>/dev/null; \<\n>pkill -9 -f "swift build" 2>/dev/null; \<\n>sleep 2; \<\n>echo "Killed any lingering build processes"<\n>
+h
+ski
+skim
+http get  https://ohmyposh.dev/api/mcp
+fkill
+ps
+cd
+ls | find topgrade
+z .config
+ls | find topgrade
+hx topgrade.tom
+ls
+ls | .mytheme
+ls | find mytheme
+z .config
+ls | find mytheme
+`top -o cpu`
+ps | find grep
+ps | find make
+ps | find emacs
+ls | find fire
+ls | gcloud
+ls | find cloud
+ls | find emacs
+emacs
+ls | find narsil
+ls | find na
+diffsense
+gk status
+gk push
+z
+http get curl -sSL https://github.com/0xjuanma/anvil/releases/latest/download/install.sh | bash
+http get https://github.com/0xjuanma/anvil/releases/download/v2.8.0/anvil-linux-arm64
+anvil update
+http get https://github.com/toolleeo/awesome-cli-apps-in-a-csv
+http get https://github.com/toolleeo/awesome-cli-apps-in-a-csv/blob/master/data/apps.csv
+http get https://raw.githubusercontent.com/toolleeo/awesome-cli-apps-in-a-csv/master/data/apps.csv <\n>  | from csv<\n>
+ls | node
+ls | find node
+cd node_modules
+ls
+bun install
+bi
+y
+ls
+y
+yazi
+cd .
+cd
+rm -rf node_modules
+ls | find node
+openskills
+bun install --force<\n>
+ls | find ast
+ls | claude-skill
+ls | find claude-skill
+z claude-skill
+z ./claude-skill
+y
+yazi
+z claude-skill
+cd ./claude-skill
+pwd
+amp skill add /Users/tuliopinheirocunha/claude-skill
+z .
+ls
+z ast-grep
+y
+yazi
+ls
+y
+yazi
+amp skill add /Users/tuliopinheirocunha/claude-skill/ast-grep/skills/ast-grep/SKILL.md
+amp skill add /Users/tuliopinheirocunha/claude-skill/ast-grep/skills/ast-grep
+z
+z ca
+cd
+ls
+ls | find bun
+ls | find uv
+z uv
+ps | find swift
+ps
+fkill
+ls | find codebuff
+z codebuff
+rm -rf codebuff
+ls | find codebuff
+z
+bun install -g codebuff
+bun install -g codebuff --force
+codebuff
+ls
+z .local
+ls
+z
+z .
+cd ..
+cd
+z .local
+ls | find .md
+z docs
+z ./docs/
+z
+ls | find wezterm
+z .config
+cd .zonfig
+cd .config
+ls | find wezterm
+z
+ls | mytheme
+ls | find mytheme
+cd . config
+z .config
+ls | find vtcode
+ls | find emacs
+cursor
+opencode run fix my nu config 
+opencode run fix my nu config nu::shell::not_a_constant
+z 
+z ca
+z
+br
+y
+ls | find doom
+z .config
+ls | find doom
+z
+ls | find .doom.d
+pl | find emacs
+ps | find emacs
+ps
+emacs server-start
+ls | find nix
+z usr
+ls | find flox
+ls
+nvim Package.swift
+ls
+spf
+ls
+rm -rf  Native_SQLite_Manager_1_31_1_TNT_MacKed.iso
+ls
+z ca
+y
+tuist install
+ls 
+z
+ls
+spf
+ls | find avim
+ls | find cliproxy
+ls | find quotio
+ls | proxypal
+ls | find proxypal
+ls
