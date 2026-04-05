@@ -92,16 +92,22 @@ complete -c tv -n "__fish_tv_needs_command" -s h -l help -d 'Print help (see mor
 complete -c tv -n "__fish_tv_needs_command" -s V -l version -d 'Print version'
 complete -c tv -n "__fish_tv_needs_command" -a "list-channels" -d 'Lists the available channels'
 complete -c tv -n "__fish_tv_needs_command" -a "init" -d 'Initializes shell completion ("tv init zsh")'
+complete -c tv -n "__fish_tv_needs_command" -a "completions" -d 'Generates standard shell tab-completion scripts for tv\'s various subcommands'
 complete -c tv -n "__fish_tv_needs_command" -a "update-channels" -d 'Downloads the latest collection of channel prototypes from github and saves them to the local configuration directory'
 complete -c tv -n "__fish_tv_needs_command" -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c tv -n "__fish_tv_using_subcommand list-channels" -s h -l help -d 'Print help'
 complete -c tv -n "__fish_tv_using_subcommand init" -s h -l help -d 'Print help'
+complete -c tv -n "__fish_tv_using_subcommand completions" -s h -l help -d 'Print help'
 complete -c tv -n "__fish_tv_using_subcommand update-channels" -l force -d 'Force update on unsupported and already existing channels'
 complete -c tv -n "__fish_tv_using_subcommand update-channels" -s h -l help -d 'Print help'
-complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init update-channels help" -f -a "list-channels" -d 'Lists the available channels'
-complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init update-channels help" -f -a "init" -d 'Initializes shell completion ("tv init zsh")'
-complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init update-channels help" -f -a "update-channels" -d 'Downloads the latest collection of channel prototypes from github and saves them to the local configuration directory'
-complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init update-channels help" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
+complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init completions update-channels help" -f -a "list-channels" -d 'Lists the available channels'
+complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init completions update-channels help" -f -a "init" -d 'Initializes shell completion ("tv init zsh")'
+complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init completions update-channels help" -f -a "completions" -d 'Generates standard shell tab-completion scripts for tv\'s various subcommands'
+complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init completions update-channels help" -f -a "update-channels" -d 'Downloads the latest collection of channel prototypes from github and saves them to the local configuration directory'
+complete -c tv -n "__fish_tv_using_subcommand help; and not __fish_seen_subcommand_from list-channels init completions update-channels help" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
+# Complete channel names for the first positional argument
+complete -c tv -n "__fish_tv_needs_command" -f -a "(tv list-channels 2>/dev/null)" -d "Channel"
+
 function __tv_parse_commandline --description 'Parse the current command line token and return split of existing filepath, and query'
     # credits to the junegunn/fzf project
     # https://github.com/junegunn/fzf/blob/9c1a47acf7453f9dad5905b7f23ad06e5195d51f/shell/key-bindings.fish#L53-L131

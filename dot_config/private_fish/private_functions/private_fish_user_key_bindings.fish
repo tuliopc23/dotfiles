@@ -27,4 +27,10 @@ function fish_user_key_bindings
 
     # bind -M default tab "commandline -f complete"
     # bind -M default shift-tab "commandline -f complete-and-search"
+
+    # Atuin AI: "?" on empty prompt (https://blog.atuin.sh/atuin-v18-13/). Use
+    # _atuin_ai_question_mark (from `atuin init fish`), not `_atuin_search --ai`.
+    # Vi mode reload clears the default bind from init; re-bind insert + command mode.
+    bind -M insert "?" _atuin_ai_question_mark
+    bind -M default "?" _atuin_ai_question_mark
 end

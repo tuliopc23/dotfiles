@@ -1,11 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "palette": {
-    "pink": "#ff7eb6",
-    "light_blue": "#78a9ff",
-    "teal": "#008080",
-    "orange": "#FF8170",
-    "magenta": "#B281EB",
+    "pink": "#FE7891",
+    "light_blue": "#236092",
+    "blue": "#4B95E9",
+    "teal": "#67B7A4",
+    "orange": "#FF816C",
+    "magenta": "#FFB0FD",
     "mint": "#ACF2E4",
     "lavender": "#DABAFF",
     "white": "#E0DEF4",
@@ -181,7 +182,7 @@
             "branch_icon": "\uf126 "
           },
           "style": "plain",
-          "template": "{{ .HEAD }}{{ if .UpstreamIcon }} {{ .UpstreamIcon }}{{ end }} <p:light_blue>{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}</> ",
+          "template": "{{ .HEAD }}{{ if .UpstreamIcon }} {{ .UpstreamIcon }}{{ end }} <p:blue>{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}</> ",
           "type": "git"
         },
         {

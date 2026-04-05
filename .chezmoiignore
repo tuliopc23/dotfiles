@@ -27,3 +27,10 @@ dot_config/fish/conf.d/bedrock.fish
 Library/CloudStorage
 GoogleDrive*
 "My Drive"
+
+# Neovim / Mini — never manage nested repos or editor metadata
+.config/nvim/.git
+.config/nvim/.cursor
+.config/nvim/.claude
+.config/nvim/.nvimlog
+.config/mini/.git

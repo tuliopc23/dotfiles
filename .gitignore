@@ -1,0 +1,17 @@
+# Backup and editor artifacts (do not commit)
+*.bak
+*.bak-*
+**/*.backup-*
+
+# Nested git dirs accidentally versioned as dot_git (chezmoi renames .git)
+**/dot_git/
+
+# Repo-root editor metadata
+/.cursor/
+
+# Neovim local/editor state (paths under source tree)
+dot_config/nvim/dot_cursor/
+dot_config/nvim/dot_nvimlog
+
+# Shell history (machine-local churn)
+dot_config/nushell/history.txt

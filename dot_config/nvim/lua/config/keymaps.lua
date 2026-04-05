@@ -1,0 +1,32 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
+
+-- NvChad tabufline (replaces LazyVim bufferline motion maps)
+vim.keymap.set("n", "<S-h>", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "Prev Buffer" })
+vim.keymap.set("n", "<S-l>", function()
+  require("nvchad.tabufline").next()
+end, { desc = "Next Buffer" })
+vim.keymap.set("n", "[b", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "Prev Buffer" })
+vim.keymap.set("n", "]b", function()
+  require("nvchad.tabufline").next()
+end, { desc = "Next Buffer" })
+vim.keymap.set("n", "[B", function()
+  require("nvchad.tabufline").move_buf(-1)
+end, { desc = "Move buffer prev" })
+vim.keymap.set("n", "]B", function()
+  require("nvchad.tabufline").move_buf(1)
+end, { desc = "Move buffer next" })
+vim.keymap.set("n", "<leader>br", function()
+  require("nvchad.tabufline").closeBufs_at_direction("right")
+end, { desc = "Delete Buffers to the Right" })
+vim.keymap.set("n", "<leader>bl", function()
+  require("nvchad.tabufline").closeBufs_at_direction("left")
+end, { desc = "Delete Buffers to the Left" })
+
+-- NvChad cheatsheet grid (reads real keymaps from nvim_get_keymap; needs multi-word `desc` on maps)
+vim.keymap.set("n", "<leader>?", "<cmd>NvCheatsheet<cr>", { desc = "Toggle NvCheatsheet" })

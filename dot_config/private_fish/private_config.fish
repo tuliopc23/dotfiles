@@ -1,22 +1,17 @@
-# config.fish
-
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
 if status is-interactive
     # -----------------
-    # Environment Variables (Fish-way)
-    # -----------------
+    # Default editor: Neovim (uses ~/.config/nvim)
     set -gx EDITOR nvim
     set -gx VISUAL nvim
     set -gx PAGER bat
     set -gx BAT_THEME ansi
     set -gx FEX_DEFAULT_COMMAND "fex --time-type modified"
     set -gx XDG_CONFIG_HOME "$HOME/.config"
-    # AWS Configuration
-    set -gx AWS_PROFILE default
-    set -gx AWS_DEFAULT_REGION us-east-1
-    set -gx AWS_REGION us-east-1
-
     # Path Additions
-    fish_add_path -p $HOME/.cargo/bin $HOME/.local/bin /opt/homebrew/bin $HOME/bin $HOME/.bun/bin $HOME/.lmstudio/bin /Users/tuliopinheirocunha/.fex/bin
+    # Prefer vite-plus shims over legacy global package bins.
+    fish_add_path -p $HOME/.vite-plus/bin $HOME/.cargo/bin $HOME/.local/bin /opt/homebrew/bin $HOME/bin $HOME/.bun-/bin $HOME/.lmstudio/bin /Users/tuliopinheirocunha/.fex/bin
     # -----------------
     # Tool Initialization
     # -----------------
@@ -31,13 +26,10 @@ if status is-interactive
     # Atuin (Cached)
     _gemini_load_cached_tool atuin "atuin init fish" "00_atuin_init.fish"
 
+    # Atuin Hex PTY proxy (fish: source the init script; avoid bash-style eval "$(...)")
+    atuin hex init | source
     # Oh My Posh (Direct Load to ensure prompt definition)
     oh-my-posh init fish --config ~/.mytheme.omp.json | source
-
-    # Cursor (opt-in to avoid slow init / errors)
-    if test -x $HOME/.local/bin/cursor-agent; and set -q CURSOR_AGENT_ENABLE
-        $HOME/.local/bin/cursor-agent shell-integration fish | source
-    end
 
     # Vi mode + blinking cursor shapes
     fish_vi_key_bindings
@@ -75,50 +67,13 @@ if status is-interactive
     alias ..="cd .."
     alias ...="cd ../.."
 
-    # Neovim Aliases (use env so NVIM_APPNAME is set in Fish)
-    set -gx NVIM_APPNAME nvim
-    alias nvc="env NVIM_APPNAME=nvchad nvim"
+    # Neovim: default nvim uses ~/.config/nvim; other configs via aliases
     alias vim="nvim"
+    alias nvc="env NVIM_APPNAME=nvchad nvim"
     alias avim="env NVIM_APPNAME=avim nvim"
     alias nvchad="env NVIM_APPNAME=nvchad nvim"
-    alias kickvim="env NVIM_APPNAME=kickvim nvim"
+    alias mini="env NVIM_APPNAME=mini nvim"
 
-    # mini as function so NVIM_APPNAME points to the mini config dir
-    function mini
-        env NVIM_APPNAME=mini nvim $argv
-    end
-
-    # Emacs-mac + Doom (single config: Doom only)
-    set -gx EMACS_BIN "/Applications/Emacs.app/Contents/MacOS/Emacs"
-    set -gx EMACSCLIENT_BIN "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-    set -gx DOOMDIR "$HOME/.doom.d"
-    set -gx EMACS_INIT_DIR "$HOME/.emacs.d"
-    set -gx ALTERNATE_EDITOR "$EMACS_BIN --init-directory $EMACS_INIT_DIR --daemon=doom"
-    fish_add_path -p "/Applications/Emacs.app/Contents/MacOS/bin"
-
-    # Start Doom daemon at shell login (socket "doom")
-    $EMACSCLIENT_BIN -s doom -e 0 2>/dev/null; or $EMACS_BIN --init-directory $EMACS_INIT_DIR --daemon=doom 2>/dev/null &
-
-    # Emacs GUI (e) - Doom; create new frame, no-wait
-    function e
-        $EMACSCLIENT_BIN -s doom -c -n -a "" $argv
-        osascript -e 'tell application "Emacs" to activate'
-    end
-
-    # Emacs Terminal (et) - Doom in current terminal
-    function et
-        $EMACSCLIENT_BIN -s doom -t -a "" $argv
-    end
-
-    # Emacs client shorthand (same as e — GUI client)
-    function ec
-        e $argv
-    end
-
-    # Standard emacs command → use GUI client
-    function emacs
-        e $argv
-    end
     function avante
         nvim -c 'lua vim.defer_fn(function()require("avante.api").zen_mode()end, 100)'
     end
@@ -131,6 +86,26 @@ if status is-interactive
             builtin cd -- "$cwd"
         end
         rm -f -- "$tmp"
+    end
+
+    # Emacs: GUI and terminal clients via server (mirrors zsh behavior)
+    set -gx EMACS_BIN "/Applications/Emacs.app/Contents/MacOS/Emacs"
+    set -gx EMACSCLIENT_BIN "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
+    set -gx EMACS_SOCKET doom
+
+    function e
+        if not $EMACSCLIENT_BIN -s $EMACS_SOCKET -a false -e t >/dev/null 2>&1
+            $EMACS_BIN --daemon=$EMACS_SOCKET
+        end
+        $EMACSCLIENT_BIN -s $EMACS_SOCKET -c -n -a "" $argv
+        osascript -e 'tell application "Emacs" to activate'
+    end
+
+    function et
+        if not $EMACSCLIENT_BIN -s $EMACS_SOCKET -a false -e t >/dev/null 2>&1
+            $EMACS_BIN --daemon=$EMACS_SOCKET
+        end
+        $EMACSCLIENT_BIN -s $EMACS_SOCKET -t -a "" $argv
     end
 
     # Tere directory navigator
@@ -212,17 +187,91 @@ fish_add_path /Users/tuliopinheirocunha/.opencode/bin
 
 source /Users/tuliopinheirocunha/.config/op/plugins.sh
 
-
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/tuliopinheirocunha/.lmstudio/bin
 # End of LM Studio CLI section
 
-# ProxyPal - Amp CLI Configuration (alternative to settings.json)
-export AMP_URL="http://localhost:8317"
-export AMP_API_KEY="proxypal-local"
+# Entire CLI shell completion
+entire completion fish | source
 
-# For Amp cloud features, get your API key from https://ampcode.com/settings
-# and add it to ProxyPal Settings > Amp CLI Integration > Amp API Key
+# Added by ToolHive UI - do not modify this block
+fish_add_path -g $HOME/.toolhive/bin
+# End ToolHive UI
+alias codebuff="~/.config/manicode/codebuff"
 
-# Emacs Terminal Alias
-alias et="emacsclient -t -a ''"
+# CARAPACE START
+if status is-interactive
+    # Keep Fish native completions as primary; use Carapace as additive context-aware coverage.
+    set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense'
+    # Preserve Fish muscle-memory: Tab runs Fish completion behavior.
+    bind --preset \t complete
+    if command -q carapace
+        carapace _carapace fish | string replace -r '^complete -e .*$' '' | source
+    end
+end
+# CARAPACE END
+
+# Never store GitHub tokens in this file. Use: `op inject` / 1Password env / a private `conf.d` snippet.
+set -gx GIT_TERMINAL_PROMPT 0
+
+# Added by git-ai installer on Tue Mar  3 19:56:35 -03 2026
+fish_add_path -g "/Users/tuliopinheirocunha/.git-ai/bin"
+
+# cubic
+fish_add_path "/Users/tuliopinheirocunha/.cubic/bin"
+
+# Bun
+set -gx BUN_INSTALL "$HOME/.bun-"
+fish_add_path "$BUN_INSTALL/bin"
+alias bunx="bun x"
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# pnpm
+set -gx PNPM_HOME /Users/tuliopinheirocunha/Library/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Added by Antigravity
+fish_add_path /Users/tuliopinheirocunha/.antigravity/antigravity/bin
+
+# Zig: last — undo wrappers that turn `zig build` into `zig master build` (unknown command: master).
+if status is-interactive
+    abbr --erase zig 2>/dev/null
+    while functions -q zig
+        functions -e zig
+    end
+    if test -d $HOME/.local/bin
+        fish_add_path -m $HOME/.local/bin
+    end
+end
