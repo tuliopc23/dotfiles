@@ -11,6 +11,8 @@ private_dot_factory
 dot_config/opencode
 
 # Secrets & Local State
+.zshenv.local
+.config/fish/conf.d/homework_github_token.fish
 .ssh/id_*
 .ssh/known_hosts
 .netrc
