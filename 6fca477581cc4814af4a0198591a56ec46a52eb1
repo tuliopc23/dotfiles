@@ -1,0 +1,27 @@
+.gitignore
+  7e9d05ad477e65ac 1-17
+.chezmoiignore
+  7e9d05ad477e65ac 30-36
+dot_zshrc
+  7e9d05ad477e65ac 78-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.5",
+  "base_commit_sha": "6fca477581cc4814af4a0198591a56ec46a52eb1",
+  "prompts": {
+    "7e9d05ad477e65ac": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "2b5d81a9-5d00-4447-b36a-632fc1ee3641",
+        "model": "default"
+      },
+      "human_author": "Tulio Cunha",
+      "messages": [],
+      "total_additions": 26,
+      "total_deletions": 1,
+      "accepted_lines": 26,
+      "overriden_lines": 0
+    }
+  }
+}
