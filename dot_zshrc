@@ -69,12 +69,6 @@ if [[ $- == *i* ]]; then
     export HOMEBREW_REPOSITORY="/opt/homebrew"
     export MANPATH="/opt/homebrew/share/man:$MANPATH"
     export INFOPATH="/opt/homebrew/share/info:$INFOPATH"
-    export EMACS_BIN="/Applications/Emacs.app/Contents/MacOS/Emacs"
-    export EMACSCLIENT_BIN="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-    export DOOMDIR="$HOME/.doom.d"
-    export EMACS_INIT_DIR="$HOME/.emacs.d"
-    export EMACS_SOCKET="doom"
-    export ALTERNATE_EDITOR="$EMACS_BIN --init-directory $EMACS_INIT_DIR --daemon=$EMACS_SOCKET"
     # Set in the environment or a non-versioned file (e.g. ~/.zshenv.local); never commit tokens.
     export HOMEBREW_GITHUB_API_TOKEN="${HOMEBREW_GITHUB_API_TOKEN-}"
     export GIT_TERMINAL_PROMPT="0"
@@ -84,8 +78,6 @@ if [[ $- == *i* ]]; then
     export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
     # Prefer vite-plus shims over legacy global package bins.
     export PATH="$HOME/.vite-plus/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:$HOME/.bun-/bin:$HOME/.lmstudio/bin:/Users/tuliopinheirocunha/.fex/bin:$PATH"
-    export PATH="/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
-    export PATH="$HOME/.emacs.d/bin:$PATH"
     export PATH="$HOME/.x-cmd.root/bin:$PATH"
     export PATH="/Users/tuliopinheirocunha/.opencode/bin:$PATH"
     export PATH="$HOME/.toolhive/bin:$PATH"
@@ -161,25 +153,6 @@ alias codebuff="~/.config/manicode/codebuff"
     tere() {
         local result=$(command tere "$@")
         [ -n "$result" ] && cd -- "$result"
-    }
-
-    e() {
-        if ! $EMACSCLIENT_BIN -s $EMACS_SOCKET -a false -e 't' >/dev/null 2>&1; then
-            $EMACS_BIN --daemon=$EMACS_SOCKET
-        fi
-        $EMACSCLIENT_BIN -s $EMACS_SOCKET -c -n -a "" "$@"
-        osascript -e 'tell application "Emacs" to activate'
-    }
-
-    et() {
-        if ! $EMACSCLIENT_BIN -s $EMACS_SOCKET -a false -e 't' >/dev/null 2>&1; then
-            $EMACS_BIN --daemon=$EMACS_SOCKET
-        fi
-        $EMACSCLIENT_BIN -s $EMACS_SOCKET -t -a "" "$@"
-    }
-
-    emacs() {
-        e "$@"
     }
 
     # -----------------

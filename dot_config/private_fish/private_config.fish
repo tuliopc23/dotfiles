@@ -88,26 +88,6 @@ if status is-interactive
         rm -f -- "$tmp"
     end
 
-    # Emacs: GUI and terminal clients via server (mirrors zsh behavior)
-    set -gx EMACS_BIN "/Applications/Emacs.app/Contents/MacOS/Emacs"
-    set -gx EMACSCLIENT_BIN "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-    set -gx EMACS_SOCKET doom
-
-    function e
-        if not $EMACSCLIENT_BIN -s $EMACS_SOCKET -a false -e t >/dev/null 2>&1
-            $EMACS_BIN --daemon=$EMACS_SOCKET
-        end
-        $EMACSCLIENT_BIN -s $EMACS_SOCKET -c -n -a "" $argv
-        osascript -e 'tell application "Emacs" to activate'
-    end
-
-    function et
-        if not $EMACSCLIENT_BIN -s $EMACS_SOCKET -a false -e t >/dev/null 2>&1
-            $EMACS_BIN --daemon=$EMACS_SOCKET
-        end
-        $EMACSCLIENT_BIN -s $EMACS_SOCKET -t -a "" $argv
-    end
-
     # Tere directory navigator
     function tere
         set --local result (command tere $argv)

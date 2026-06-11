@@ -30,6 +30,10 @@ Library/CloudStorage
 GoogleDrive*
 "My Drive"
 
+# Doom Emacs — archived in dot_config/doom and private_dot_doom.d; do not deploy
+.config/doom
+.doom.d
+
 # Neovim / Mini — never manage nested repos or editor metadata
 .config/nvim/.git
 .config/nvim/.cursor

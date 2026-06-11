@@ -118,12 +118,6 @@ alias nvchad = NVIM_APPNAME=nvchad nvim
 alias kickvim = NVIM_APPNAME=kickvim nvim
 alias minivim = NVIM_APPNAME=minivim nvim
 
-# Emacs
-alias em = emacsclient -c -a ""
-alias spmacs = env SPACEMACSDIR=$"($env.HOME)/.config/spacemacs" command emacs -nw --init-directory $"($env.HOME)/.config/spacemacs"
-alias doomt = /opt/homebrew/bin/emacs -nw --init-directory $"($env.HOME)/.emacs.d"
-alias doomg = /Applications/Emacs.app/Contents/MacOS/Emacs --init-directory $"($env.HOME)/.emacs.d"
-
 # -----------------
 # Tool Initialization
 # -----------------
